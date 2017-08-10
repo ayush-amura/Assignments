@@ -1,0 +1,27 @@
+---- topics completed ----
+
+- From step 1
+
+  1. Basic Linux commands
+  2. Compiler vs Interpreter (pros and cons)
+  3. OOPS
+  4. Git
+
+- From step 2
+
+  1. Ruby primer from RubyMonk 70%
+  2. Lynda Video Tutorials		
+  3. irb
+  4. Ruby Doc (partial)
+
+- From step 3
+                         
+  1. web fundamentals basics
+
+
+- From step 5
+
+  1. SQL (Mysql) //Not implemented
+  2. NOSQL (MongoDB)  //Not implemented
+  3. SQL vs NOSQL //Not implemented
+
