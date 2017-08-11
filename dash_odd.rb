@@ -9,4 +9,4 @@ def dash(number="")
    end   
 arr.join
 end
-p dash("112233445566")
+p dash("1233211233212")
