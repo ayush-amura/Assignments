@@ -45,7 +45,7 @@ $dict={
 
 def dna_sequence(sequence='')
 
-  p sequence.scan(/.{3}/).map{|s| $dict[s] unless $dict[s]=='Stop' }.compact.join
+  p sequence.scan(/.{3}/).map{|s| $dict[s] unless $dict[s]=='Stop' }.join
 end
 
 dna_sequence('UGCGAUGAAUGGGCUCGCUCC')
