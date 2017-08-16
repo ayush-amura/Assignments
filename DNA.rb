@@ -44,8 +44,13 @@ $dict={
 }
 
 def dna_sequence(sequence='')
-
-  p sequence.scan(/.{3}/).map{|s| $dict[s] unless $dict[s]=='Stop' }.join
+      
+     seq = sequence.scan(/[A-Z]{3}/)
+     flag=nil
+     seq = seq.map{|s| $dict[s] == 'Stop' ? (flag =false;nil) : $dict[s] if flag.nil?}
+     seq = seq.join
+     p seq
 end
 
-dna_sequence('UGCGAUGAAUGGGCUCGCUCC')
+dna_sequence('UGCGAUGAAUAAGCUCGCUCC')
+
