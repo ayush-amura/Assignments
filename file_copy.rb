@@ -3,8 +3,9 @@ file = File.open("input.txt","r")
 content=[]
 file.each_line do |line|
   content<<line.chomp
-end
 
+end
+puts content
 puts "Sorting options 1:[A-Z] 2:[Z-A]"
 choice=gets.chomp()
 puts "Invalid input" unless ["1","2"].include?(choice) 
