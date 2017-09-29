@@ -1,6 +1,9 @@
+require 'pry'
 $prompt = '> '
 class Parser
 def introduction
+	binding.pry
+	
 	puts"====================================="
 	puts "-----------HTML - PARSER------------"
 	puts"====================================="
@@ -25,7 +28,7 @@ file_read
   	else
     	puts "Choose appropriate"
     end
-	
+	end
 end
 		
 def file_read
@@ -36,7 +39,6 @@ def file_read
 	  @html_file << line.chomp
 	  @content=@html_file.to_s
 	end
-	
 end
 
 def file_html
@@ -45,24 +47,47 @@ def file_html
 	puts "" 
 end
 
-
 def tree_html
-	key = /(<(?:"[^"]*"['"]*|'[^']*'['"]*|[^'">])+>)/
-	tree = @content.scan(key) 
+	parsed=[]
+	key = /(<((?:"[^"]*"['"]*|'[^']*'['"]*|[^'">])+)>)/
 	puts "Html Tree ::"
-	puts tree
-	puts "----------------------------------------------"
-	menu
+	tree = @content.scan(key)
+	# .each do |node|
+	# tree_tag = node[1].split()
+	p tree
+	p tree.class
+	# puts "----------------------------------------------"
+	# end
+	tree.each do |i|
+		tree.each do |j|
+			 i_str=i.to_s
+			 puts i_str
+			 if ( j =='/'+i_str)
+			 	p 'sad'
+
+			 # p'-----------------'
+			 # p j
+		end
+		end		
+		end
+
 end
+	# menu
 
 def tag_html
-	key_tag= /(<[a-z]+\s{0,1}>)/
-	tags = @content.scan(key_tag) 
-	puts "Tags in HTML file are ::"
-	puts tags
+	key_start_tag= /(<([a-z]+\s{0,1})>)/
+	key_end_tag = /(<\/(.*?)>)/
+	puts 'start tags'
+	@content.scan(key_start_tag).each do |a| 
+	p a
+	end
+	puts 'end tags' 
+	@content.scan(key_end_tag).each do |a| 
+	p a
+	end  
+	# puts "Tags in HTML file are ::"
 	puts "----------------------------------------------"
-	menu
-end
+	# menu
 end
 
 p = Parser.new

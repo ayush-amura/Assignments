@@ -1,1 +1,27 @@
-<h1>hello</h1>
+<html>
+	<head>
+		<title>Page Title</title>
+	</head>
+	<body>
+		<h>My First Heading</h>
+		<p>My first paragraph.</p>
+	</body>
+</html>
+
+
+
+
+//Serialize data // avoid overriding 
+//URL vs URl_Root // >>when model is defined outside of the collection
+//DOM event vs Event element
+//done vs success
+//error vs fails
+//async flag in ajax
+//sync ajax
+//$el vs el
+//single element replacement in model marionette
+//jquery functions // parent/find/closest/
+//on render vs on attach
+//bind and unbind
+//clickevent vs onClickevent
+//views events
