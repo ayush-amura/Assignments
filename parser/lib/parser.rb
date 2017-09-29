@@ -1,8 +1,9 @@
+require 'tag'
 require 'pry'
-$prompt = '> '
+$prompt = '>'
+
 class Parser
 def introduction
-	binding.pry
 	
 	puts"====================================="
 	puts "-----------HTML - PARSER------------"
@@ -12,7 +13,7 @@ def introduction
 end
 
 def menu
-file_read 
+	file_read 
 	puts "1.HTML Tree"
 	puts "2.HTML Tags"
 	puts "3.HTML Source file"
@@ -48,38 +49,51 @@ def file_html
 end
 
 def tree_html
+	tags =[]
 	parsed=[]
-	key = /(<((?:"[^"]*"['"]*|'[^']*'['"]*|[^'">])+)>)/
+	key = /(<[a-z0-9]+\s{0,1})|(<\/[a-z0-9]+\s{0,1})/
 	puts "Html Tree ::"
 	tree = @content.scan(key)
-	# .each do |node|
-	# tree_tag = node[1].split()
-	p tree
-	p tree.class
-	# puts "----------------------------------------------"
-	# end
-	tree.each do |i|
-		tree.each do |j|
-			 i_str=i.to_s
-			 puts i_str
-			 if ( j =='/'+i_str)
-			 	p 'sad'
-
-			 # p'-----------------'
-			 # p j
+	tree = tree.flatten.compact.map{|t| t[0]=''; t.strip }
+	count = 0
+	tree.flatten.each do |node|
+		tag = Tag.new(node)
+		tag.children = get_children(tag,tree.flatten,count) unless node.start_with?('/')
+		tags << tag 
+		count+=1
+	end
+	tags.each do |tag|
+		unless tag.name.start_with?('/')
+			puts tag.name
+			p tag.children
 		end
-		end		
-		end
-
+	end
 end
-	# menu
+
+def get_children(tag, arr, count)
+	flag = true
+	temp = arr[count]
+	t= ''
+	children = []
+		
+	arr[count+1..-1].each do |node|
+		break unless node.match(/\/#{temp}/).nil?
+		if flag
+			children.push(node)
+			t= node
+			flag = false
+		end
+		flag = true unless node.match(/\/#{t}/).nil?	
+	end
+	children
+end
 
 def tag_html
 	key_start_tag= /(<([a-z]+\s{0,1})>)/
 	key_end_tag = /(<\/(.*?)>)/
 	puts 'start tags'
 	@content.scan(key_start_tag).each do |a| 
-	p a
+		p a
 	end
 	puts 'end tags' 
 	@content.scan(key_end_tag).each do |a| 
@@ -90,5 +104,3 @@ def tag_html
 	# menu
 end
 
-p = Parser.new
-p.introduction
